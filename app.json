@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "Progress Camera",
+    "slug": "progress-camera",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.aldrinjenson.progresscamera"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0B0A09",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "com.aldrinjenson.progresscamera"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Progress Camera uses the camera to take your progress photos.",
+          "microphonePermission": false,
+          "recordAudioAndroid": false
+        }
+      ],
+      "@react-native-community/datetimepicker",
+      [
+        "expo-notifications",
+        {
+          "color": "#FFD60A"
+        }
+      ],
+      "./plugins/withVolumeShutter"
+    ],
+    "backgroundColor": "#0B0A09"
+  }
+}
