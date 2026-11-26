@@ -17,6 +17,7 @@ Minimal UI, inspired by [Tinycam](https://tiny.cam/) by Shyjal: opens straight t
 - **Timeline** with a "Day N" count, **Compare** (Day 1 vs any day), **Flipbook**.
 - **Reminders** per collection: daily or weekly (pick the day), any time. Tapping one opens that collection's camera.
 - **Volume-key shutter** (Android).
+- **Gallery backup**: every photo is also saved to `Pictures/Progress Camera` (turn on Google Photos backup for that folder). If the app is reinstalled or its data is wiped, it rebuilds itself from that album. Deleting in the app keeps the gallery copy.
 - **Export to folder**: full-quality copies, one subfolder per collection, plus `notes.txt`; re-running only copies new photos.
 - Notes per photo; Android back button walks back through screens.
 

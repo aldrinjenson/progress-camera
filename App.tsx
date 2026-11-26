@@ -1,7 +1,7 @@
 import * as Notifications from 'expo-notifications';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, BackHandler, View } from 'react-native';
+import { ActivityIndicator, Alert, BackHandler, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import CameraScreen from './src/CameraScreen';
 import CollectionsScreen from './src/CollectionsScreen';
@@ -32,9 +32,24 @@ export default function App() {
     return () => sub.remove();
   }, [route]);
 
+  const ready = !!store.state;
+
+  // On launch: rebuild from the gallery backup if the app is empty, then back up anything not yet copied.
+  useEffect(() => {
+    if (!ready) return;
+    (async () => {
+      try {
+        const restored = await store.restoreFromGallery();
+        if (restored > 0) Alert.alert('Photos restored', `${restored} photo${restored === 1 ? '' : 's'} restored from Pictures/Progress Camera.`);
+      } catch (e) {
+        console.warn('restore failed', e);
+      }
+      store.backupPending();
+    })();
+  }, [ready]);
+
   // Tapping a reminder opens the camera on that collection.
   const response = Notifications.useLastNotificationResponse();
-  const ready = !!store.state;
   useEffect(() => {
     const id = response?.notification.request.content.data?.collectionId;
     if (ready && typeof id === 'string') {

@@ -111,8 +111,9 @@ export default function SettingsScreen({ store, go, id }: { store: Store; go: Go
         <View style={{ gap: 12 }}>
           <Text style={ui.label}>Backup</Text>
           <Text style={ui.dim}>
-            Photos live only inside this app. Export copies them, full quality, into a folder you pick: Documents, or a
-            new folder inside Download (Android won't allow Download itself). Running it again only copies new photos.
+            Every photo is also saved, full quality, to your gallery in Pictures/Progress Camera, so turn on backup for
+            that folder in Google Photos. If the app is ever reinstalled it restores itself from there. Deleting a photo
+            here leaves the gallery copy. Export makes an extra copy in a folder you pick.
           </Text>
           <Pressable onPress={doExport} disabled={busy || count === 0} style={[ui.pill, { alignSelf: 'flex-start', opacity: busy || count === 0 ? 0.5 : 1 }]}>
             <Text style={ui.text}>{busy ? 'Exporting…' : 'Export to folder'}</Text>
