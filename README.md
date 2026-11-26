@@ -20,24 +20,32 @@ Minimal UI, inspired by [Tinycam](https://tiny.cam/) by Shyjal: opens straight t
 - **Export to folder**: full-quality copies, one subfolder per collection, plus `notes.txt`; re-running only copies new photos.
 - Notes per photo; Android back button walks back through screens.
 
-## Run
-```bash
-npm install
-```
-The volume shutter is a native config plugin (`plugins/withVolumeShutter.js`), so Expo Go can't run the full app; build the APK below.
-
 ## Code
-- `App.tsx`: three-screen state router
+- `App.tsx`: small state router (camera, collections, timeline, settings) + Android back handling
 - `src/store.ts`: AsyncStorage state + photo files under `Paths.document/photos`
-- `src/CameraScreen.tsx`, `src/CollectionsScreen.tsx`, `src/TimelineScreen.tsx`
+- `src/CameraScreen.tsx`, `src/CollectionsScreen.tsx`, `src/TimelineScreen.tsx`, `src/SettingsScreen.tsx`
+- `src/reminders.ts` (expo-notifications), `src/backup.ts` (export via Storage Access Framework)
+- `plugins/`: volume-key shutter and release signing config plugins
 
 ## Next
 Swipe up to the timeline, grid overlay, timelapse video export, home-screen widget.
 
-## Build an APK (local, no EAS)
+## Install
+Download the latest APK from [Releases](../../releases/latest) and open it on your Android phone (allow installs from your browser or file manager). Or add this repo to [Obtainium](https://github.com/ImranR98/Obtainium) to get updates automatically.
+
+## Release
+Bump `version` and `android.versionCode` in `app.json`, then:
 ```bash
-npx expo prebuild --platform android --clean
-cd android && ANDROID_HOME=/opt/homebrew/share/android-commandlinetools ./gradlew assembleRelease
-adb install -r app/build/outputs/apk/release/app-release.apk
+git tag v1.0.1 && git push origin v1.0.1
 ```
-Release is signed with the debug key (fine for sideloading). Photos live in `/data/user/0/com.aldrinjenson.progresscamera/files/photos/`.
+GitHub Actions builds a signed arm64 APK and publishes the release. Signing secrets: `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD`.
+
+## Local build
+```bash
+./scripts/build-apk.sh                        # signed, if ../progress-camera-keys exists
+adb install -r progress-camera.apk
+```
+Photos live in the app's private storage (`/data/user/0/com.aldrinjenson.progresscamera/files/photos/`); use Export to copy them out.
+
+## License
+MIT

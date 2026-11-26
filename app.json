@@ -18,7 +18,8 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.aldrinjenson.progresscamera"
+      "package": "com.aldrinjenson.progresscamera",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -39,7 +40,8 @@
           "color": "#FFD60A"
         }
       ],
-      "./plugins/withVolumeShutter"
+      "./plugins/withVolumeShutter",
+      "./plugins/withReleaseSigning"
     ],
     "backgroundColor": "#0B0A09"
   }
